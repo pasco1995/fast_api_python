@@ -1,0 +1,35 @@
+version: "3"
+services: 
+  api:
+    build: .
+    depends_on:
+      - postgres
+    ports:
+      - 8000:8000
+    volumes:
+      - ./:/usr/src/app:ro
+    command: bash -c "alembic upgrade head && uvicorn app.basic_api_voting:app --host 0.0.0.0 --port 8000"
+    # env_file:
+    #   - ./.env
+    environment:
+      - DATABASE_HOSTNAME=postgres
+      - DATABASE_PORT=5432
+      - DATABASE_PASSWORD=postgres
+      - DATABASE_USERNAME=postgres
+      - DATABASE_NAME=fastapi
+      - SECRET_KEY=iurztst77e44s875es7sheg87eh85
+      - ALGORITHM=HS256
+      - ACCESS_TOKEN_EXPIRE_MINUTES=60
+  
+  postgres:
+    image: postgres
+    environment:
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=fastapi
+    volumes:
+      - postgres-db:/var/lib/postgresql/data
+    ports:
+      - 5431:5432
+
+volumes:
+  postgres-db:
