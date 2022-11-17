@@ -96,7 +96,5 @@ jobs:
           key: ${{ secrets.PRODUCTION_KEY }}
           script: |
             cd app/src
-            git pull
+            git pull origin main
             sudo systemctl restart gunicorn
-
-
