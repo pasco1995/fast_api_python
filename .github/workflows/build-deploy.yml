@@ -6,7 +6,6 @@ on:
 
 jobs:
   Test:
-    stage: test
     environment: 
       name: testing
     env:
@@ -52,7 +51,7 @@ jobs:
           pytest -v -s
 
   Deploy:
-    stage: deploy
+    needs: Test
     environment:
       name: deploying
     runs-on: ubuntu-latest
