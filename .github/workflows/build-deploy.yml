@@ -81,7 +81,7 @@ jobs:
         run: echo ${{ steps.docker_build.outputs.digest }}
 
   Deploy:
-    #needs: Test
+    needs: Test
     environment:
       name: production
 
