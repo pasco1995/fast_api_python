@@ -5,8 +5,8 @@ on:
     branches: ["main"]
 
 jobs:
-  test:
-
+  Test:
+    stage: test
     environment: 
       name: testing
     env:
@@ -52,8 +52,10 @@ jobs:
           pytest -v -s
 
   Deploy:
+    stage: deploy
     environment:
       name: deploying
+    runs-on: ubuntu-latest
     steps:
       - name: Login to Docker Hub
         uses: docker/login-action@v1
