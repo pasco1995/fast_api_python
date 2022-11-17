@@ -51,7 +51,7 @@ jobs:
           pip install pytest
           pytest -v -s
 
-  Deploy:
+  BuildDockerImage:
     needs: Test
     environment:
       name: deploying
@@ -79,3 +79,22 @@ jobs:
           tags: ${{secrets.DOCKER_HUB_USERNAME}}/fastapi_python_course:latest
       - name: Image digest
         run: echo ${{ steps.docker_build.outputs.digest }}
+
+  Deploy:
+    #needs: Test
+    environment:
+      name: production
+
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: executing remote ssh commands using ssh key
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.PRODUCTION_HOST }}
+          username: ${{ secrets.PRODUCTION_USERNAME }}
+          key: ${{ secrets.PRODUCTION_KEY }}
+#          port: ${{ secrets.PORT }}
+          script: whoami
+
+
