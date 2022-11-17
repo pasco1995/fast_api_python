@@ -5,6 +5,7 @@ on:
     branches: ["main"]
 
 jobs:
+
   Test:
     environment: 
       name: testing
@@ -54,8 +55,12 @@ jobs:
     needs: Test
     environment:
       name: deploying
+
     runs-on: ubuntu-latest
+
     steps:
+      - name: Pulling git repo
+        uses: actions/checkout@v2
       - name: Login to Docker Hub
         uses: docker/login-action@v1
         with:
