@@ -94,9 +94,9 @@ jobs:
           host: ${{ secrets.PRODUCTION_HOST }}
           username: ${{ secrets.PRODUCTION_USERNAME }}
           key: ${{ secrets.PRODUCTION_KEY }}
-          port: 22
           script: |
-            whoami
-            ls
+            cd app/src
+            git pull
+            sudo systemctl restart gunicorn
 
 
