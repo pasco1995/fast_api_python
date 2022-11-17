@@ -94,7 +94,9 @@ jobs:
           host: ${{ secrets.PRODUCTION_HOST }}
           username: ${{ secrets.PRODUCTION_USERNAME }}
           key: ${{ secrets.PRODUCTION_KEY }}
-#          port: ${{ secrets.PORT }}
-          script: whoami
+          port: 22
+          script: |
+            whoami
+            ls
 
 
